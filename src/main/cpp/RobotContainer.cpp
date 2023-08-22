@@ -13,6 +13,7 @@
 
 #include <frc2/command/Commands.h>
 #include "subsystems/SubShooter.h"
+#include "subsystems/SubIntake.h"
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
@@ -36,6 +37,15 @@ void RobotContainer::ConfigureBindings() {
   frc2::Trigger([this] {
     return m_subsystem.ExampleCondition();
   }).OnTrue(ExampleCommand(&m_subsystem).ToPtr());
+
+  _driverController.X().OnTrue(RunOnce([]{
+    SubIntake::GetInstance().StartIntake();
+    SubIntake::GetInstance().ExtendIntake();
+  }));
+  _driverController.X().OnFalse(RunOnce([]{
+    SubIntake::GetInstance().StopIntake();
+    SubIntake::GetInstance().RetractIntake();
+  }));
 
   // Schedule `ExampleMethodCommand` when the Xbox controller's B button is
   // pressed, cancelling on release.

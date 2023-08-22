@@ -11,6 +11,7 @@
 
 class SubIntake : public frc2::SubsystemBase {
  public:
+  static SubIntake& GetInstance() {static SubIntake inst; return inst;}
   SubIntake();
 
   /**
