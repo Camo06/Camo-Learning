@@ -22,9 +22,13 @@ constexpr int kDriverControllerPort = 0;
 
 namespace canid {
     constexpr int shootermotor {1};
+    constexpr int intakemotor {2};
 }
 
 namespace pcm {
     constexpr int feederCylinderFoward =1;
     constexpr int feederCylinderReverse =2;
+    constexpr int intakeCylinderFoward =3;
+    constexpr int intakeCylinderReverse =4;
+    // Can I put 2 Cylinders in one constexpr?
 }
